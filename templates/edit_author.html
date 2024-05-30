@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="text-center mb-4">Редактировать автора</h2>
+<form method="POST" action="{{ url_for('edit_author', author_id=author._id) }}">
+    <div class="form-group mb-3">
+        <label for="name">Имя:</label>
+        <input type="text" id="name" name="name" class="form-control" value="{{ author.name }}" required>
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Сохранить изменения</button>
+</form>
+{% endblock %}

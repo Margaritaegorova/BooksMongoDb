@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Управление Библиотекой</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="d-flex">
+        <nav class="nav flex-column bg-dark text-white p-3" style="min-height: 100vh;">
+            <a class="navbar-brand text-white mb-4" href="/">Библиотека</a>
+            <a class="nav-link text-white" href="/books">Книги</a>
+            <a class="nav-link text-white" href="/authors">Авторы</a>
+            {% if current_user.is_authenticated %}
+            <a class="nav-link text-white mt-auto" href="/logout">Выйти</a>
+            {{ current_user.username }} - {{ current_user.role }}
+            {% else %}
+            <a class="nav-link text-white mt-auto" href="/login">Войти</a>
+            {% endif %}
+        </nav>
+        <div class="container mt-5">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div class="mt-4">
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

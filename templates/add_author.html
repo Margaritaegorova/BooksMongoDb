@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="text-center mb-4">Добавить автора</h2>
+<form method="POST" action="{{ url_for('add_author') }}">
+    <div class="form-group mb-3">
+        <label for="name">Имя:</label>
+        <input type="text" id="name" name="name" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Добавить автора</button>
+</form>
+{% endblock %}
